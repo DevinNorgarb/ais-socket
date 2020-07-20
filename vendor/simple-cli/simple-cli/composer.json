@@ -1,0 +1,60 @@
+{
+    "name": "simple-cli/simple-cli",
+    "description": "A simple command line framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "KyleK",
+            "email": "kylekatarnls@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.1 || ^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15.0",
+        "phan/phan": "^2.3",
+        "phpunit/phpunit": "^7",
+        "phpmd/phpmd": "dev-master",
+        "phpstan/phpstan": "^0.11",
+        "squizlabs/php_codesniffer": "^3.0",
+        "vimeo/psalm": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleCli\\": "src/SimpleCli/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "bin": [
+        "bin/simple-cli"
+    ],
+    "scripts": {
+        "unit": "phpunit --coverage-text --coverage-clover=coverage.xml",
+        "cs": "phpcs",
+        "csf": "php check-version.php 7.4.0-dev || php-cs-fixer fix -v --diff --dry-run",
+        "md": "phpmd src,tests text ./phpmd.xml",
+        "stan": "phpstan analyse --autoload-file=vendor/autoload.php --level max src tests",
+        "phan": "phan",
+        "psalm": "psalm",
+        "style": [
+            "@psalm",
+            "@phan",
+            "@cs",
+            "@md",
+            "@stan",
+            "@csf"
+        ],
+        "test": [
+            "@unit",
+            "@style"
+        ]
+    }
+}
