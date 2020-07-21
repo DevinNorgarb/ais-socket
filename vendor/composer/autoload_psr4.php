@@ -12,5 +12,12 @@ return array(
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'SimpleCli\\' => array($vendorDir . '/simple-cli/simple-cli/src/SimpleCli'),
+    'React\\Stream\\' => array($vendorDir . '/react/stream/src'),
+    'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
+    'React\\Promise\\Timer\\' => array($vendorDir . '/react/promise-timer/src'),
+    'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
+    'React\\EventLoop\\' => array($vendorDir . '/react/event-loop/src'),
+    'React\\Dns\\' => array($vendorDir . '/react/dns/src'),
+    'React\\Cache\\' => array($vendorDir . '/react/cache/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon', $vendorDir . '/carbon-cli/carbon-cli/src/Carbon'),
 );

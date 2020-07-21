@@ -3,7 +3,8 @@
     "require": {
         "nesbot/carbon": "^2.36",
         "carbon-cli/carbon-cli": "^1.2",
-        "symfony/var-dumper": "^5.1"
+        "symfony/var-dumper": "^5.1",
+        "react/socket": "^1.5"
     },
     "authors": [
         {

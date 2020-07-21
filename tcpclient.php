@@ -1,22 +1,34 @@
 <?php
+
+
+
+
+
+
+
+
+
+
+
 require "vendor/autoload.php";
 
-$fp = stream_socket_client("tcp://data.aishub.net:5415", $errno, $errstr);
-
-feof($fp);
-dump(feof($fp));
-$i = 0;
-while (!feof($fp) != false) {
-    $i++;
-    echo fread($fp, 1024 * 8);
-    dump($i);
 
 
-    // if (!$fp) {
-    //     echo "ERROR: $errno - $errstr<br />\n";
-    // } else {
-    //     fwrite($fp, "\n");
-    //     echo fread($fp, 26);
-    //     fclose($fp);
-    // }
+
+
+$server = stream_socket_server("tcp://0.0.0.0:5425", $errno, $errstr);
+
+$fp = stream_socket_client("tcp://data.aishub.net:5415", $errno, $errstr, 30);
+
+
+if (!$fp) {
+    echo "$errstr ($errno)<br />\n";
+} else {
+    fwrite($fp, "Aloha");
+    while (!feof($fp)) {
+        file_put_contents("vesselfinder_ais_logs", fgets($fp, 1024), FILE_APPEND);
+    }
+    fclose($fp);
 }
+
+return;
