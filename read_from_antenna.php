@@ -14,21 +14,36 @@
 
 
 // Opening a file
-$myfile = fopen("/dev/serial0", "r");
+$myfile = fopen("/dev/serial0", "rw+");
 $sock1 = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 $txleng = 1024;
 $rxleng = 160;
 // loop around the file to output the content
 // line by line
+
+
 while(true) {
-    if (!feof($myfile)) {
+ if (!feof($myfile)) {
         # code...
-        echo fgets($myfile);
-        socket_sendto($sock1, fgets($myfile), $txleng, 0,  '5.9.207.224', 11144);
-        socket_sendto($sock1, fgets($myfile), $txleng, 0,  '144.76.105.244', 3415);
+        echo fgets($myfile,26);
+
+        sendTo(fgets($myfile));
+
         file_put_contents('log.txt', fgets($myfile).PHP_EOL, FILE_APPEND);
-    }
+     }
 }
-fclose($myfile);
+//fclose($myfile);
+
+function sendTo($msg) {
+    $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+
+    $len = strlen($msg);
+
+    socket_sendto($sock, $msg, $len, 0,     '5.9.207.224', 11144);
+    socket_sendto($sock, $msg, $len, 0, '144.76.105.244', 3415);
+
+
+    socket_close($sock);
+}
 
 // closing the file
