@@ -13,6 +13,27 @@
 
 
 
+//try this
+// fwrite($stream, "enable");
+while(true){
+    $stream = fopen("/dev/serial0", "rw+");
+
+    // $line = fread( $stream, 70);
+    // echo $line;
+    $line = fgets($stream);
+    if($line != ''){
+    var_dump($line);
+    sendTo($line);
+
+    // fclose($stream);
+
+    // break;
+}
+}
+return;
+
+
+
 // Opening a file
 $myfile = fopen("/dev/serial0", "rw+");
 $sock1 = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
@@ -22,16 +43,16 @@ $rxleng = 160;
 // line by line
 
 
-while(true) {
- if (!feof($myfile)) {
-        # code...
-        echo fgets($myfile,26);
+// while(true) {
+//  if (!feof($myfile)) {
+//         # code...
+//         echo fgets($myfile,26);
 
-        sendTo(fgets($myfile));
+//         sendTo(fgets($myfile));
 
-        file_put_contents('log.txt', fgets($myfile).PHP_EOL, FILE_APPEND);
-     }
-}
+//         file_put_contents('log.txt', fgets($myfile).PHP_EOL, FILE_APPEND);
+//      }
+// }
 //fclose($myfile);
 
 function sendTo($msg) {
