@@ -20,8 +20,14 @@ function sendTo($msg) {
     echo($msg);
     socket_sendto($sock, $msg, $len, 0,     '5.9.207.224', 11144);
     socket_sendto($sock, $msg, $len, 0, '144.76.105.244', 3415);
+    socket_sendto($sock, $msg, $len, 0, '0.0.0.0', 1234);
 
-    file_put_contents(date('Y-m-d').'.txt', $msg.PHP_EOL, FILE_APPEND);
+    if(!file_exists("/home/pi/ais-socket/".date('Y-m-d').'.txt')) {
+ 	file_put_contents("/home/pi/ais-socket/".date('Y-m-d').'.txt', "");
+	chmod("/home/pi/ais-socket/".date('Y-m-d').'.txt', 0755);
+    }
+
+    file_put_contents("/home/pi/ais-socket/".date('Y-m-d').'.txt', $msg.PHP_EOL, FILE_APPEND);
 
     socket_close($sock);
 }
