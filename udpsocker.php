@@ -45,14 +45,16 @@ echo "Socket bind OK \n:";
 //Do some communication, this loop can handle multiple clients
 while(1)
 {
-	echo"Waiting for data ... \n";
+//	echo"Waiting for data ... \n";
 
 	//Receive some data
 	$r = socket_recvfrom($sock, $buf, 512, 0, $remote_ip, $remote_port);
 
-	echo "$remote_ip : $remote_port -- " . $buf;
+//	echo "$remote_ip : $remote_port -- " . $buf;
 
-	$parts = explode('\!A', $buf);
+//	$parts = explode('\!A', $buf);
+
+
 	// $meta = explode("c:", $parts[0]);
 	// $meyta2 = explode("c:", $meta[1]);
 	// $dATE = ""
@@ -76,19 +78,20 @@ while(1)
 	// if (!is_null($date)) {
 	// 	# code...
 	// }
-	// dump($date);
-	$parts[1] = "!A".$parts[1];
+          var_dump($buf);
+//	$parts[1] = "!A".$parts[1];
 
 
-	$part = $parts[1];
-	$part = str_replace("\r\n","",$parts[1]);
+//	$part = $parts[1];
+//	$part = str_replace("\r\n","",$parts[1]);
 
 	$date = date('Y-m-d H:i:s');
+	file_put_contents("/root/ais-socket/ais2.log", $date ." ". $buf, FILE_APPEND);
+//echo "printed";
+//	file_put_contents("./ais.log", $date . " | ".  $parts[1],  FILE_APPEND);
+//return;
 
-	file_put_contents("./ais.log", $date . " | ".  $parts[1],  FILE_APPEND);
-
-
-
+continue;
 $part = "'".$part."'";
 $date = "'".$date."'";
 $remote_ip = "'".$remote_ip."'";
@@ -111,7 +114,7 @@ $remote_ip = "'".$remote_ip."'";
 
 
 
-	file_put_contents("./ais.log", $date . " | ".  $parts[1],  FILE_APPEND);
+//	file_put_contents("./ais.log", $date . " | ".  $parts[1],  FILE_APPEND);
 
 
 	//Send back the data to the client
